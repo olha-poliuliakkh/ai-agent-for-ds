@@ -1,5 +1,3 @@
-from pipeline_modeling1 import my_set_df, model_to_use
-
 system_prompt1 = f''' 
 Your task is to classify user queries. There are two categories of queries:
 1. Classification (selecting a category for a value)
@@ -20,13 +18,18 @@ Is this customer a man or a women if their age is 23, annual income is 55 and sp
 using ML methods.
 '''
 
-system_prompt21 = f''' 
-Use {my_set_df} as dataset. Generate the code for user's task using {model_to_use}. 
+
+
+system_prompt21 = ''' 
+Use {my_set_df} as dataset, it is saved in variable "df". Generate the code for user's task using {model_to_use}. 
 The code need to be in python and ready to be run, 
 so there souldn't be any quotes etc, especially "```python". 
 Mark all your comments and other non-code words with #.
 '''
-system_prompt22 = f''' 
+
+#system_prompt21.format(my_set_df=123)
+
+system_prompt22 = ''' 
 Generate the code for user's task using {model_to_use}. The code need to be in python and ready to be run, 
 so there souldn't be any quotes etc, especially "```python". 
 Mark all your comments and other non-code words with #.

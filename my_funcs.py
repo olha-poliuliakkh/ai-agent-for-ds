@@ -18,7 +18,7 @@ def classify_task(req) :
 
 
 
-def generate_cod (sys_prompt, us_prompt, d_set=None):
+def generate_code(sys_prompt, us_prompt, d_set=None):
     error_log = []
 
     while True and len(error_log) <= 10:
@@ -32,9 +32,11 @@ def generate_cod (sys_prompt, us_prompt, d_set=None):
                 generated_code = response.choices[0].message.content.strip()
                 if isinstance(d_set, str) and d_set in globals():
                     lines = generated_code.split("\n")
-                    for i in range(len(lines)):
-                        if "df =" in lines[i]:
-                            lines[i] = f"df = {d_set}"  # тут уже не рядок, а доступ до змінної
+                    lines.insert(0, f"df = {d_set}")
+                    # for i in range(len(lines)):
+                    #     if "df =" in lines[i]:
+                    #         lines[i] = f"df = {d_set}"  
+                    #         break
                     generated_code = "\n".join(lines)
                 exec(generated_code)
                 break
@@ -50,6 +52,9 @@ def generate_cod (sys_prompt, us_prompt, d_set=None):
             finally:
                 sys.stdout = sys.__stdout__
                 sys.stderr = sys.__stderr__
+
+    sys.stdout = sys.__stdout__
+    sys.stderr = sys.__stderr__
 
     output_result = stdout_buffer.getvalue()
     print(generated_code)
