@@ -1,4 +1,4 @@
-system_prompt1 = f''' 
+query_type_classifier_prompt = f''' 
 Your task is to classify user queries. There are two categories of queries:
 1. Classification (selecting a category for a value)
 2. Predicting a dependent value (linear regression)
@@ -14,23 +14,18 @@ I need to define is this book a fiction or non-fiction.
 '''
 
 test_3 = f''' 
-Is this customer a man or a women if their age is 23, annual income is 55 and spending score equals 6? Try to predict it 
-using ML methods.
+Is this customer a man or a women if their age is 23, annual income is 55 and spending score equals 6?
 '''
 
-
-
-system_prompt21 = ''' 
-Use {my_set_df} as dataset, it is saved in variable "df". Generate the code for user's task using {model_to_use}. 
+code_generation_prompt = ''' 
+Use {df} as dataset, it is saved in variable "my_set_df". Generate the code for user's task using {model_to_use}. 
 The code need to be in python and ready to be run, 
-so there souldn't be any quotes etc, especially "```python". 
+so make sure there no quotes etc, especially "```python". 
 Mark all your comments and other non-code words with #.
 '''
 
-#system_prompt21.format(my_set_df=123)
-
-system_prompt22 = ''' 
-Generate the code for user's task using {model_to_use}. The code need to be in python and ready to be run, 
-so there souldn't be any quotes etc, especially "```python". 
-Mark all your comments and other non-code words with #.
-'''
+# system_prompt22 = ''' 
+# Generate the code for user's task using {model_to_use}. The code need to be in python and ready to be run, 
+# so there souldn't be any quotes etc, especially "```python". 
+# Mark all your comments and other non-code words with #.
+# '''

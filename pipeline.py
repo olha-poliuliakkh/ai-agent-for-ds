@@ -13,15 +13,12 @@ from my_funcs import classify_task, generate_code
 
 my_set_df = pd.read_csv("C:\\Users\\Olga\\Downloads\\Mall_Customers.csv")
 
-r = resp(pr.system_prompt1, pr.test_3)
-req = r.choices[0].message.content.strip()
+r = resp(pr.query_type_classifier_prompt, pr.test_3)
+req = int(r.choices[0].message.content.strip())
 print("Classification result (req):", req)
 
 model_to_use = classify_task(req)
 
-# if 'my_set_df' in globals():
-#     generate_code(pr.system_prompt21, pr.test_3, 'my_set_df')
-# else:
-#     generate_code (pr.system_prompt22, pr.test_3)
-
-generate_code(pr.system_prompt21, pr.test_3, 'my_set_df')
+code, result = generate_code(pr.code_generation_prompt.format(df = my_set_df, model_to_use = model_to_use), pr.test_3, "my_set_df", my_set_df)
+print("Final code: ", code)
+print("Result: ", result)
